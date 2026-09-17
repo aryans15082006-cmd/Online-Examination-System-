@@ -1,1 +1,92 @@
+import java.util.Scanner;
 
+public class OnlineExaminationSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Login details
+        String correctUsername = "student";
+        String correctPassword = "1234";
+
+        System.out.println("=================================");
+        System.out.println("     ONLINE EXAMINATION SYSTEM");
+        System.out.println("=================================");
+
+        System.out.print("Enter Username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+
+        if (!username.equals(correctUsername) ||
+            !password.equals(correctPassword)) {
+
+            System.out.println("Invalid username or password.");
+            sc.close();
+            return;
+        }
+
+        System.out.println("\nLogin successful!");
+        System.out.println("Welcome, " + username);
+
+        // Questions
+        String[] questions = {
+            "Which language is used for Android development?\nA. Java\nB. HTML\nC. SQL\nD. CSS",
+
+            "Which keyword is used to create a class in Java?\nA. function\nB. class\nC. define\nD. create",
+
+            "Which method is the entry point of a Java program?\nA. start()\nB. run()\nC. main()\nD. execute()",
+
+            "Which of the following is not an OOP concept?\nA. Inheritance\nB. Polymorphism\nC. Compilation\nD. Encapsulation",
+
+            "Which symbol is used to end a statement in Java?\nA. .\nB. :\nC. ;\nD. ,"
+        };
+
+        char[] correctAnswers = {'A', 'B', 'C', 'C', 'C'};
+
+        int score = 0;
+
+        System.out.println("\n---------- EXAM STARTED ----------");
+
+        for (int i = 0; i < questions.length; i++) {
+
+            System.out.println("\nQuestion " + (i + 1));
+            System.out.println(questions[i]);
+
+            System.out.print("Enter your answer: ");
+            String input = sc.nextLine().toUpperCase();
+
+            if (input.length() > 0 &&
+                input.charAt(0) == correctAnswers[i]) {
+
+                score++;
+            }
+        }
+
+        // Result
+        int totalQuestions = questions.length;
+        double percentage = (score * 100.0) / totalQuestions;
+
+        System.out.println("\n=================================");
+        System.out.println("          EXAM RESULT");
+        System.out.println("=================================");
+
+        System.out.println("Student Name : " + username);
+        System.out.println("Total Questions : " + totalQuestions);
+        System.out.println("Correct Answers : " + score);
+        System.out.println("Wrong Answers : " + (totalQuestions - score));
+        System.out.println("Percentage : " + percentage + "%");
+
+        if (percentage >= 40) {
+            System.out.println("Result : PASS");
+        } else {
+            System.out.println("Result : FAIL");
+        }
+
+        System.out.println("=================================");
+
+        sc.close();
+    }
+}
